@@ -1,0 +1,285 @@
+﻿@{
+    ViewData["Title"] = "Inventario Page";
+}
+
+
+<div class="row">
+    <div class="col-sm-12">
+
+        <!--Inicio tarjeta-->
+        <div class="card">
+            <div class="card-header">Inventarios</div>
+            <div class="card-body">
+
+                <button class="btn btn-success" id="btnNuevo">Nuevo Movimiento</button>
+
+                <hr />
+
+                <table class="table table-striped" id="tbInventario" >
+                    <thead>
+                        <tr>
+                            <th>CompañiaVenta</th>
+                            <th>AlmacenVenta</th>
+                            <th>NroDocumento</th>
+                            <th>CodItem2</th>
+                            <th>Proveedor</th>
+                            <th>AlmacenDestino</th>
+                            <th>Cantidad</th>
+                            <th>FechaTransaccion</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <!--Fin tarjeta-->
+
+    </div>
+</div>
+
+
+
+<!--Inicio Modal-->
+<div class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detalle Inventario</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-2">
+                    <label>CodigoCompañia</label>
+                    <input type="text" class="form-control" id="txtCodCia" />
+                </div>
+                <div class="mb-2">
+                    <label>CompaniaVenta</label>
+                    <input type="text" class="form-control" id="txtCompaniaVenta3" />
+                </div>
+                <div class="mb-2">
+                    <label>AlmacenVenta</label>
+                    <input type="text" class="form-control" id="txtAlmacenVenta" />
+                </div>
+                <div class="mb-2">
+                    <label>TipoMovimiento</label>
+                    <input type="text" class="form-control" id="txtTipoMovimiento" />
+                </div>
+                <div class="mb-2">
+                    <label>TipoDocumento</label>
+                    <input type="text" class="form-control" id="txtTipoDocumento" />
+                </div>
+                <div class="mb-2">
+                    <label>NroDocumento</label>
+                    <input type="text" class="form-control" id="txtNroDocumento" />
+                </div>
+                <div class="mb-2">
+                    <label>CodItem2</label>
+                    <input type="text" class="form-control" id="txtCodItem2" />
+                </div>
+                <div class="mb-2">
+                    <label>Proveedor</label>
+                    <input type="text" class="form-control" id="txtProveedor" />
+                </div>
+                <div class="mb-2">
+                    <label>AlmacenDestino</label>
+                    <input type="text" class="form-control" id="txtAlmacenDestino" />
+                </div>
+                <div class="mb-2">
+                    <label>Cantidad</label>
+                    <input type="text" class="form-control" id="txtCantidad" />
+                </div>
+                <div class="mb-2">
+                    <label>FechaTransaccion</label>
+                    <input type="text" class="form-control" id="txtFechaTransaccion" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnGuardar">Guardar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Fin Modal-->
+
+
+@section Scripts{
+
+    <script>
+
+        const Modelo_base = {
+            CodCia : "",
+            CompaniaVenta3:"",
+            AlmacenVenta:"",
+            TipoMovimiento: "",
+            TipoDocumento:"",
+            NroDocumento:"",
+            CodItem2:"",
+            Proveedor:"",
+            AlmacenDestino:"",
+            Cantidad:"",
+            FechaTransaccion:""
+
+        }
+
+        $(document).ready(() =>{            
+            listaInventarios();
+        })
+
+        function mostrarModal(modelo){
+            
+            $("#txtCodCia").val(modelo.CodCia);
+            $("#txtCompaniaVenta3").val(modelo.CompaniaVenta3)
+            $("#txtAlmacenVenta").val(modelo.AlmacenVenta)
+            $("#txtTipoMovimiento").val(modelo.TipoMovimiento)
+            $("#txtTipoDocumento").val(modelo.TipoDocumento)
+            $("#txtNroDocumento").val(modelo.NroDocumento)
+            $("#txtCodItem2").val(modelo.CodItem2)
+            $("#txtProveedor").val(modelo.Proveedor)
+            $("#txtAlmacenDestino").val(modelo.AlmacenDestino)
+            $("#txtCantidad").val(modelo.Cantidad)
+            $("#txtFechaTransaccion").val(modelo.FechaTransaccion)
+
+            $('.modal').modal('show');
+        }
+
+        $("#btnNuevo").click(() => {
+        
+            mostrarModal(Modelo_base);
+        })
+
+        $("#btnGuardar").click(() => {
+            let NuevoModelo = Modelo_base;
+  
+            NuevoModelo["CodCia"] = $("#txtCodCia").val();
+            NuevoModelo["CompaniaVenta3"] = $("#txtCompaniaVenta3").val();
+            NuevoModelo["AlmacenVenta"] = $("#txtAlmacenVenta").val();
+            NuevoModelo["TipoMovimiento"] = $("#txtTipoMovimiento").val();
+            NuevoModelo["TipoDocumento"] = $("#txtTipoDocumento").val();
+            NuevoModelo["NroDocumento"] = $("#txtNroDocumento").val();
+            NuevoModelo["CodItem2"] = $("#txtCodItem2").val();
+            NuevoModelo["Proveedor"] = $("#txtProveedor").val();
+            NuevoModelo["AlmacenDestino"] = $("#txtAlmacenDestino").val();
+            NuevoModelo["Cantidad"] = $("#txtCantidad").val();
+            NuevoModelo["FechaTransaccion"] = $("#txtFechaTransaccion").val();
+            console.log(JSON.stringify(NuevoModelo))
+            if($("#txtCodCia").val() != "0"){
+                fetch("Inventario/Insertar",{
+                    method:"POST",
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify( NuevoModelo)
+                })
+                .then((response) => {
+                    return response.ok ? response.json() : Promise.reject(response)
+                })
+                .then((dataJson) => {
+                
+                    if(dataJson.valor){
+                        alert("registrado");
+                          $('.modal').modal('hide');
+                         listaInventarios();
+                    }
+                })
+            }else{
+                fetch("Inventario/Actualizar",{
+                        method:"PUT",
+                        headers: {
+                            'Content-Type': 'application/json;charset=utf-8'
+                        },
+                        body: JSON.stringify( NuevoModelo)
+                    })
+                    .then((response) => {
+                        return response.ok ? response.json() : Promise.reject(response)
+                    })
+                    .then((dataJson) => {
+                
+                        if(dataJson.valor){
+                            alert("editado");
+                              $('.modal').modal('hide');
+                             listaInventarios();
+                        }
+                    })
+            
+            }
+
+        })
+
+        function listaInventarios(){
+            
+            fetch("Inventario/Lista")
+            .then((response) => {
+                return response.ok ? response.json() : Promise.reject(response)
+            })
+            .then((dataJson) => {
+            
+                $("#tbInventario tbody").html("");
+                dataJson.forEach((item) => {                    
+                    $("#tbInventario tbody").append(
+                        $("<tr>").append(                           
+                            $("<td>").text(item.companiaVenta3),
+                            $("<td>").text(item.almacenVenta),                        
+                            $("<td>").text(item.nroDocumento),
+                            $("<td>").text(item.codItem2),
+                            $("<td>").text(item.proveedor),
+                            $("<td>").text(item.almacenDestino),
+                            $("<td>").text(item.cantidad),
+                            $("<td>").text(item.fechaTransaccion),
+                            $("<td>").append(
+                                $("<button>").addClass("btn btn-primary btn-sm me-2 btn-editar").data("modelo",item).text("Editar"),
+                                $("<button>").addClass("btn btn-danger btn-sm btn-eliminar").data("id",item.CodCia).text("Eliminar")
+                            )
+                        )
+                    )
+                
+                })
+
+                
+            })
+        
+        }
+
+        $("#tbInventario tbody").on("click",".btn-editar",function(){
+            let Inventario = $(this).data("modelo")
+            
+            mostrarModal(Inventario)
+        })
+
+
+          $("#tbInventario tbody").on("click",".btn-eliminar",function(){
+            let CodCia = $(this).data("id")
+            
+            let resultado = window.confirm("¿Desea eliminar el Inventario?");
+
+
+            if(resultado){
+
+
+                  fetch("Inventario/Eliminar?id=" + CodCia,{
+                        method:"DELETE"
+                    })
+                    .then((response) => {
+                        return response.ok ? response.json() : Promise.reject(response)
+                    })
+                    .then((dataJson) => {
+                
+                        if(dataJson.valor){
+                             listaInventarios();
+                        }
+                    })
+               
+
+            }
+
+            
+        })
+
+
+
+    </script>
+
+}
