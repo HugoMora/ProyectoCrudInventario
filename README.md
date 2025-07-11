@@ -21,7 +21,7 @@ Este proyecto proporciona una aplicación ASP.NET Core MVC (.NET 6) para gestion
    CREATE DATABASE BD_INVENTARIO;
    GO
    ```
-4. Abrir el script de procedimientos (`Procedures.docx`) o su versión `.sql` y ejecutar todo el contenido para crear los stored procedures:
+4. Abrir el script de procedimientos  `Inventario.sql` y ejecutar todo el contenido para crear los stored procedures:
    - `uConsultarInventario`
    - `uInsertarMovInventario`
    - `uActualizarMovInventario`
