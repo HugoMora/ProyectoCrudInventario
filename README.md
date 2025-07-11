@@ -51,18 +51,18 @@ Deberías ver los registros insertados por el script de prueba.
 
 ## 3. Ejecutar la aplicación
 
-1. Clonar o abrir la solución del proyecto `InventarioSolution.sln`.
+1. Clonar o abrir la solución del proyecto `SolutionCrud.sln`.
 2. Validar la cadena de conexión en **Web/appsettings.json**:
    ```json
    {
      "ConnectionStrings": {
-       "DefaultConnection": "Server=.;Database=BD_INVENTARIO;Trusted_Connection=True;"
+       "cadenaSQL": "Server=(local); DataBase=DB_INVENTARIO;Integrated Security=true"
      }
    }
    ```
 3. En Visual Studio, establece el proyecto **Web** como inicio.
 4. Ejecuta la aplicación (`F5` en VS o `dotnet run` desde `Web/` en la CLI).
-5. Navegar a `https://localhost:5001/Inventario`.
+5. Navegar a `https://localhost`.
 
 ---
 
